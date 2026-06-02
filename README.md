@@ -68,16 +68,12 @@ payloads carry non-conformant variants that the strict `System.Text.Json`
 parsers reject) — same pragmatic choice `os-core-common` makes with
 `Map<String, Object>`.
 
-See [PLAN.md](PLAN.md) for the full design rationale, the future-scope
-roadmap, and open decisions.
-
 [njs]: https://github.com/RicoSuter/NJsonSchema
 
 ## Repo layout
 
 ```
 osdu-csharp-schemas/
-├── PLAN.md
 ├── README.md
 ├── schemas/2026.05.22/             # pinned snapshot of data-definitions Generated/
 ├── tools/SchemaGen/                # dotnet console: extracts `data`, flattens, runs NJsonSchema
