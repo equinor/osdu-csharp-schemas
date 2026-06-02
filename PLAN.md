@@ -187,6 +187,15 @@ Why NJsonSchema:
    "{partition}:reference-data--CurveSampleType:float:"` → `string` with a
    `[RegularExpression]` annotation. A tagged-string wrapper type is a
    later refinement.
+7. **Date / date-time / time stay as strings.** OSDU example payloads
+   carry non-conformant variants — `+0000` (no colon) instead of `+00:00`
+   or `Z`, full date-time values inside `format: date` fields, time-of-day
+   with timezone offset like `11:13:15+02:00` — that the strict
+   `System.Text.Json` `DateTimeOffset`/`DateOnly`/`TimeOnly` parsers
+   reject. Settings:
+   `DateType = DateTimeType = TimeType = "string"`. Consumers parse
+   leniently if they need a typed value. Same pragmatic stance as
+   `os-core-common`'s `Map<String, Object>`.
 
 ## Repository layout
 
@@ -252,8 +261,8 @@ Minimum for v0.1:
 
 | Milestone | Scope | Files in closure | Purpose |
 |---|---|---:|---|
-| **v0.1** | `WellLog` × {1.0.0…1.5.0} | 35 | End-to-end proof; the issue's actual target. |
-| **v0.2** | Well-domain WPCs (10 types: `WellLog`, `WellboreTrajectory`, `WellboreIntervalSet`, `WellboreMarkerSet`, `WellPressureTestInterpretation`, `WellPressureTestRawMeasurement`, `WellMAASP`, `WellFluidsReport`, `WellOperationsReport`, `WellOpsNonProductiveTime`) | ~150 (est.) | Coherent shippable library for WBDDMS users. |
+| **v0.1** | `WellLog` × {1.0.0…1.5.0} | 35 | ✅ Done. End-to-end proof; the issue's actual target. |
+| **v0.2** | Well-domain WPCs (10 types: `WellLog`, `WellboreTrajectory`, `WellboreIntervalSet`, `WellboreMarkerSet`, `WellPressureTestInterpretation`, `WellPressureTestRawMeasurement`, `WellMAASP`, `WellFluidsReport`, `WellOperationsReport`, `WellOpsNonProductiveTime`) — 32 schema versions | 74 | ✅ Done. Coherent shippable library for WBDDMS users. |
 | **v0.3** | All `work-product-component` (93 types) | ~148 (93 WPC + 55 shared abstracts) | Full WPC coverage. |
 | (deferred) | `master-data`, `dataset`, `reference-data` | — | Separate axes; bring on when demand exists. |
 

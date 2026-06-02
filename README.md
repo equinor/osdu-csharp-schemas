@@ -40,19 +40,35 @@ var wellLog = new Record
 await osdu.WellboreDdms.Ddms.V3.Welllogs.PostAsync([wellLog]);
 ```
 
-## v0.1 scope
+## Current scope (v0.2 — well-domain WPCs)
 
-| | |
+10 OSDU `work-product-component` types covering the WBDDMS well-data
+surface, with **every published version of each** in side-by-side
+namespaces:
+
+| Type | Versions |
 |---|---|
-| **Types** | `WellLog` only |
-| **Versions** | 1.0.0, 1.1.0, 1.2.0, 1.3.0, 1.4.0, 1.5.0 |
-| **Input** | 6 WellLog schema files + 29 abstract files (pinned snapshot) |
-| **Generator** | [NJsonSchema][njs] (draft-07) |
-| **Output** | One `Data` class per version + nested types (Curves, VerticalMeasurement, …) |
-| **Forward-compat** | `[JsonExtensionData]` on every class — unknown fields round-trip |
+| `WellLog` | 1.0.0, 1.1.0, 1.2.0, 1.3.0, 1.4.0, 1.5.0 |
+| `WellboreTrajectory` | 1.0.0 → 1.4.0 |
+| `WellboreIntervalSet` | 1.0.0 → 1.3.1 |
+| `WellboreMarkerSet` | 1.0.0 → 1.5.1 |
+| `WellPressureTestInterpretation` | 1.0.0 |
+| `WellPressureTestRawMeasurement` | 1.0.0, 1.1.0 |
+| `WellMAASP` | 1.0.0 |
+| `WellFluidsReport` | 2.0.0 |
+| `WellOperationsReport` | 2.0.0, 2.1.0 |
+| `WellOpsNonProductiveTime` | 1.0.0 |
 
-See [PLAN.md](PLAN.md) for the full design rationale, future scopes, and
-open decisions.
+**32 schema versions** + 42 abstract building blocks = 74 input files.
+Generator: [NJsonSchema][njs] (draft-07). Output: one `Data` class per
+version + nested types, all with `[JsonExtensionData]` so unknown fields
+round-trip. Date / time / date-time fields are emitted as `string` (OSDU
+example payloads carry non-conformant variants that the strict
+`System.Text.Json` parsers reject) — same pragmatic choice
+`os-core-common` makes with `Map<String, Object>`.
+
+See [PLAN.md](PLAN.md) for the full design rationale, the future-scope
+roadmap, and open decisions.
 
 [njs]: https://github.com/RicoSuter/NJsonSchema
 

@@ -54,6 +54,15 @@ foreach (var entry in manifest.Schemas)
         JsonLibrary = CSharpJsonLibrary.SystemTextJson,
         GenerateDataAnnotations = true,
         RequiredPropertiesMustBeDefined = false,
+        // All date / date-time / time formats stay as raw strings. OSDU
+        // example payloads carry non-conformant variants — `+0000` without a
+        // colon, date-time values in `format: date` fields, time-of-day with
+        // offset like `11:13:15+02:00` — that the strict System.Text.Json
+        // parsers reject. Keeping these as strings mirrors os-core-common's
+        // pragmatic approach and leaves any parsing to the consumer.
+        DateType = "string",
+        DateTimeType = "string",
+        TimeType = "string",
     };
 
     var generator = new CSharpGenerator(dataSchema, settings);
