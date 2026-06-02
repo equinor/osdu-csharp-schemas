@@ -10,6 +10,15 @@
     <Authors>Equinor</Authors>
     <Description>Typed C# domain models generated from the OSDU schema registry. Composes with Equinor.OsduCsharpClient through its UntypedNode JSON bridge.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/equinor/osdu-csharp-schemas</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/equinor/osdu-csharp-schemas</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>osdu;schemas;welllog;wellbore;wbddms</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>
