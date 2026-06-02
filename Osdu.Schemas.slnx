@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/Osdu.Schemas/Osdu.Schemas.csproj" />
+  <Project Path="tools/SchemaGen/SchemaGen.csproj" />
+  <Project Path="tests/Osdu.Schemas.Tests/Osdu.Schemas.Tests.csproj" />
+</Solution>

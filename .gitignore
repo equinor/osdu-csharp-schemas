@@ -1,0 +1,17 @@
+# .NET build artifacts
+bin/
+obj/
+*.user
+
+# NuGet
+*.nupkg
+*.snupkg
+
+# Generated C# (re-run `dotnet run --project tools/SchemaGen` to regenerate)
+src/Osdu.Schemas/Generated/
+
+# IDE
+.vs/
+.idea/
+*.suo
+.DS_Store

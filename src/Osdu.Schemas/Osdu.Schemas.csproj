@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Equinor.Osdu.Schemas</PackageId>
+    <Version>0.1.0-alpha</Version>
+    <RootNamespace>Osdu.Schemas</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <Authors>Equinor</Authors>
+    <Description>Typed C# domain models generated from the OSDU schema registry. Composes with Equinor.OsduCsharpClient through its UntypedNode JSON bridge.</Description>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+  </PropertyGroup>
+
+</Project>
