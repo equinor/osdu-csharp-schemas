@@ -15,3 +15,6 @@ src/Osdu.Schemas/Generated/
 .idea/
 *.suo
 .DS_Store
+
+# Local-only working doc
+PLAN.md
