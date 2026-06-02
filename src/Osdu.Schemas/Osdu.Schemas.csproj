@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Equinor.Osdu.Schemas</PackageId>
-    <Version>0.1.0-alpha</Version>
+    <Version>0.1.0</Version>
     <RootNamespace>Osdu.Schemas</RootNamespace>
   </PropertyGroup>
 

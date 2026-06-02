@@ -1,0 +1,35 @@
+name: Build and test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
+        with:
+          dotnet-version: "10.x"
+
+      - name: Generate C# from schemas
+        run: dotnet run --project tools/SchemaGen --configuration Release
+
+      - name: Build
+        run: dotnet build Osdu.Schemas.slnx --configuration Release
+
+      - name: Test
+        run: dotnet test Osdu.Schemas.slnx --configuration Release --no-build --logger "console;verbosity=normal"
