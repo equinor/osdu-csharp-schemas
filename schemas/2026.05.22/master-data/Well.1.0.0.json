@@ -1,25 +1,25 @@
 {
-  "x-osdu-license": "Copyright 2024, The Open Group \\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 . Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.",
-  "$id": "https://schema.osdu.opengroup.org/json/work-product-component/WellMAASP.1.0.0.json",
+  "x-osdu-license": "Copyright 2022, The Open Group \\nLicensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 . Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.",
+  "$id": "https://schema.osdu.opengroup.org/json/master-data/Well.1.0.0.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "x-osdu-schema-source": "osdu:wks:work-product-component--WellMAASP:1.0.0",
-  "title": "WellMAASP",
-  "description": "Calculated Maximum Allowable Annulus Surface Pressures for a set of Wellhead Annuli appropriate for a specific timeframe of the well to support Well integrity Annular pressure management.",
+  "x-osdu-schema-source": "osdu:wks:master-data--Well:1.0.0",
+  "title": "Well",
+  "description": "The origin of a set of wellbores.",
   "type": "object",
   "properties": {
     "id": {
       "description": "Previously called ResourceID or SRN which identifies this OSDU resource object without version.",
       "title": "Entity ID",
       "type": "string",
-      "pattern": "^[\\w\\-\\.]+:work-product-component\\-\\-WellMAASP:[\\w\\-\\.\\:\\%]+$",
-      "example": "namespace:work-product-component--WellMAASP:c61046e6-3891-565f-839e-100a34bf0b44"
+      "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Well:[\\w\\-\\.\\:\\%]+$",
+      "example": "namespace:master-data--Well:6c60ceb0-3521-57b7-9bd8-e1d7c9f66230"
     },
     "kind": {
       "description": "The schema identification for the OSDU resource object following the pattern {Namespace}:{Source}:{Type}:{VersionMajor}.{VersionMinor}.{VersionPatch}. The versioning scheme follows the semantic versioning, https://semver.org/.",
       "title": "Entity Kind",
       "type": "string",
       "pattern": "^[\\w\\-\\.]+:[\\w\\-\\.]+:[\\w\\-\\.]+:[0-9]+.[0-9]+.[0-9]+$",
-      "example": "osdu:wks:work-product-component--WellMAASP:1.0.0"
+      "example": "osdu:wks:master-data--Well:1.0.0"
     },
     "version": {
       "description": "The version number of this OSDU resource; set by the framework.",
@@ -94,82 +94,65 @@
           "$ref": "../abstract/AbstractCommonResources.1.0.0.json"
         },
         {
-          "$ref": "../abstract/AbstractWPCGroupType.1.2.0.json"
+          "$ref": "../abstract/AbstractMaster.1.0.0.json"
         },
         {
-          "$ref": "../abstract/AbstractWorkProductComponent.1.1.0.json"
+          "$ref": "../abstract/AbstractFacility.1.0.0.json"
         },
         {
           "type": "object",
           "properties": {
-            "WellID": {
+            "DefaultVerticalMeasurementID": {
+              "description": "The default datum reference point, or zero depth point, used to determine other points vertically in a well.  References an entry in the VerticalMeasurements array.",
+              "type": "string"
+            },
+            "DefaultVerticalCRSID": {
+              "description": "The default vertical coordinate reference system used in the vertical measurements for a well or wellbore if absent from input vertical measurements and there is no other recourse for obtaining a valid CRS.",
               "type": "string",
-              "title": "Well ID",
-              "description": "The ID of the well which parents the MAASP records.",
-              "example": "namespace:master-data--Well:110000911755:",
-              "pattern": "^[\\w\\-\\.]+:master-data\\-\\-Well:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+              "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-CoordinateReferenceSystem:[\\w\\-\\.\\:\\%]+:[0-9]*$",
               "x-osdu-relationship": [
                 {
-                  "GroupType": "master-data",
-                  "EntityType": "Well"
+                  "GroupType": "reference-data",
+                  "EntityType": "CoordinateReferenceSystem"
                 }
               ]
             },
-            "MAASPDate": {
-              "type": "string",
-              "title": "MAASP Date",
-              "description": "Date/time MAASP was calculated/published.",
-              "format": "date-time",
-              "example": "2023-08-15T01:00:00+0000"
-            },
-            "MAASPA": {
-              "type": "number",
-              "title": "MAASP A",
-              "description": "Inner-most annulus maximum allowable surface pressure.",
-              "example": "1034 psi",
-              "x-osdu-frame-of-reference": "UOM:pressure"
-            },
-            "MAASPB": {
-              "type": "number",
-              "title": "MAASP B",
-              "description": "2nd inner-most maximum allowable surface pressure.",
-              "example": "86 psi",
-              "x-osdu-frame-of-reference": "UOM:pressure"
-            },
-            "MAASPC": {
-              "type": "number",
-              "title": "MAASP C",
-              "description": "3rd inner-most annulus maximum allowable surface pressure.",
-              "example": "81 psi",
-              "x-osdu-frame-of-reference": "UOM:pressure"
-            },
-            "MAASPD": {
-              "type": "number",
-              "title": "MAASP D",
-              "description": "4th inner-most annulus maximum allowable surface pressure.",
-              "example": "25 psi",
-              "x-osdu-frame-of-reference": "UOM:pressure"
-            },
-            "Remarks": {
+            "VerticalMeasurements": {
+              "description": "List of all depths and elevations pertaining to the well, like, water depth, mud line elevation, etc.",
               "type": "array",
-              "title": "Remarks",
-              "description": "Remarks",
-              "example": [
-                {
-                  "RemarkSequenceNumber": 1,
-                  "Remark": "MAASP revision triggered by casing corrosion inspection",
-                  "RemarkSource": "WCP SF-14_21_22_25 (16/3/2023)",
-                  "RemarkDate": "2023-08-09"
-                }
-              ],
+              "x-osdu-indexing": {
+                "type": "nested"
+              },
               "items": {
-                "$ref": "../abstract/AbstractRemark.1.0.0.json"
+                "allOf": [
+                  {
+                    "type": "object",
+                    "title": "Vertical Measurement ID",
+                    "properties": {
+                      "VerticalMeasurementID": {
+                        "description": "The ID for a distinct vertical measurement within the Wellbore VerticalMeasurements array so that it may be referenced by other vertical measurements if necessary.",
+                        "type": "string"
+                      }
+                    }
+                  },
+                  {
+                    "$ref": "../abstract/AbstractFacilityVerticalMeasurement.1.0.0.json"
+                  }
+                ]
               }
+            },
+            "InterestTypeID": {
+              "description": "Pre-defined reasons for interest in the well or information about the well.",
+              "type": "string",
+              "pattern": "^[\\w\\-\\.]+:reference-data\\-\\-WellInterestType:[\\w\\-\\.\\:\\%]+:[0-9]*$",
+              "x-osdu-relationship": [
+                {
+                  "GroupType": "reference-data",
+                  "EntityType": "WellInterestType"
+                }
+              ]
             }
           },
-          "required": [
-            "WellID"
-          ],
           "title": "IndividualProperties"
         },
         {
@@ -190,32 +173,23 @@
     "legal"
   ],
   "additionalProperties": false,
-  "x-osdu-review-status": "Accepted",
   "x-osdu-virtual-properties": {
-    "data.VirtualProperties.DefaultName": {
-      "type": "string",
-      "priority": [
-        {
-          "path": "data.Name"
-        }
-      ]
-    },
     "data.VirtualProperties.DefaultLocation": {
       "type": "object",
       "priority": [
         {
-          "path": "data.SpatialArea"
-        },
+          "path": "data.SpatialLocation"
+        }
+      ]
+    },
+    "data.VirtualProperties.DefaultName": {
+      "type": "string",
+      "priority": [
         {
-          "path": "data.SpatialPoint"
+          "path": "data.FacilityName"
         }
       ]
     }
   },
-  "x-osdu-inheriting-from-kind": [
-    {
-      "name": "WorkProductComponent",
-      "kind": "osdu:wks:AbstractWPCGroupType:1.2.0"
-    }
-  ]
+  "x-osdu-inheriting-from-kind": []
 }

@@ -262,7 +262,7 @@ Minimum for v0.1:
 | Milestone | Scope | Files in closure | Purpose |
 |---|---|---:|---|
 | **v0.1** | `WellLog` × {1.0.0…1.5.0} | 35 | ✅ Done. End-to-end proof; the issue's actual target. |
-| **v0.2** | Well-domain WPCs (10 types: `WellLog`, `WellboreTrajectory`, `WellboreIntervalSet`, `WellboreMarkerSet`, `WellPressureTestInterpretation`, `WellPressureTestRawMeasurement`, `WellMAASP`, `WellFluidsReport`, `WellOperationsReport`, `WellOpsNonProductiveTime`) — 32 schema versions | 74 | ✅ Done. Coherent shippable library for WBDDMS users. |
+| **v0.2** | Wellbore DDMS surface — every entity the WBDDMS `/ddms/v3/*` endpoints handle: 6 WPC (`WellLog`, `WellboreTrajectory`, `WellboreIntervalSet`, `WellboreMarkerSet`, `PPFGDataset`, `WellPressureTestRawMeasurement`) + 3 master-data (`Well`, `Wellbore`, `WellLogAcquisition`) = 43 schema versions | 103 | ✅ Done. Scope derived directly from the WBDDMS OpenAPI spec. |
 | **v0.3** | All `work-product-component` (93 types) | ~148 (93 WPC + 55 shared abstracts) | Full WPC coverage. |
 | (deferred) | `master-data`, `dataset`, `reference-data` | — | Separate axes; bring on when demand exists. |
 
