@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Equinor.Osdu.Schemas</PackageId>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <RootNamespace>Osdu.Schemas</RootNamespace>
   </PropertyGroup>
 
@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
