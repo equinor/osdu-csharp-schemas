@@ -1,6 +1,6 @@
 {
-  "id": "namespace:work-product-component--WellFluidsReport:cd888e9e-b68f-5412-a11d-bc109ce381b5",
-  "kind": "osdu:wks:work-product-component--WellFluidsReport:2.0.0",
+  "id": "namespace:work-product-component--PPFGDataset:bb2f4d26-6446-508a-b137-7239ee1bbea1",
+  "kind": "osdu:wks:work-product-component--PPFGDataset:1.1.0",
   "version": 1562066009929332,
   "acl": {
     "owners": [
@@ -36,170 +36,7 @@
       "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"m\",\"baseMeasurement\":{\"ancestry\":\"L\",\"type\":\"UM\"},\"type\":\"UAD\"}",
       "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:m:",
       "propertyNames": [
-        "Fluid[].MeasuredDepth",
-        "Fluid[].TVD",
-        "Fluid[].FilterCakeLtlp",
-        "Fluid[].FilterCakeHthp",
-        "Fluid[].AverageCuttingSize"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "kg/m3",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"kg/m3\",\"baseMeasurement\":{\"ancestry\":\"M/L3\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:kg%2Fm3:",
-      "propertyNames": [
-        "Fluid[].EquivalentCirculatingDensity",
-        "Fluid[].EquivalentStaticDensity",
-        "Fluid[].KickToleranceIntensity",
-        "Fluid[].Density",
-        "Fluid[].SolidsLowGrav",
-        "Fluid[].SolidsLowGravCorrected",
-        "Fluid[].SolidsHiGrav",
-        "Fluid[].SolidsHiGravCorrected",
-        "Fluid[].Lcm",
-        "Fluid[].Chloride",
-        "Fluid[].Calcium",
-        "Fluid[].Magnesium",
-        "Fluid[].Potassium",
-        "Fluid[].BrineDensity",
-        "Fluid[].Lime",
-        "Fluid[].CalciumChloride",
-        "Fluid[].OilCtgDry",
-        "Fluid[].Sulfide",
-        "Fluid[].Carbonate",
-        "Fluid[].Iron",
-        "Fluid[].OilGrease",
-        "Fluid[].Salt",
-        "Fluid[].WaterPhaseSalinity",
-        "Fluid[].WholeMudCalcium",
-        "Fluid[].WholeMudChloride",
-        "Fluid[].ZincOxide",
-        "Fluid[].SodiumChloride"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "m3",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"m3\",\"baseMeasurement\":{\"ancestry\":\"L3\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:m3:",
-      "propertyNames": [
-        "Fluid[].KickToleranceVolume",
-        "Fluid[].FiltrateLtlp",
-        "Fluid[].FiltrateHthp",
-        "Fluid[].Pm",
-        "Fluid[].PmFiltrate",
-        "Fluid[].Mf",
-        "Fluid[].AlkalinityP1",
-        "Fluid[].AlkalinityP2"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "K",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"K\",\"baseMeasurement\":{\"ancestry\":\"K\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:K:",
-      "propertyNames": [
-        "Fluid[].TemperatureFlowLine",
-        "Fluid[].TemperatureViscosity",
-        "Fluid[].FiltrateTemperatureHthp",
-        "Fluid[].MudTempPh",
-        "Fluid[].Tct",
-        "Fluid[].Rheometer[].TemperatureRheometer"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "s",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"s\",\"baseMeasurement\":{\"ancestry\":\"T\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:s:",
-      "propertyNames": [
-        "Fluid[].ViscosityFunnel"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "Pa.s",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"Pa.s\",\"baseMeasurement\":{\"ancestry\":\"M/LT\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:Pa.s:",
-      "propertyNames": [
-        "Fluid[].PlasticViscosity",
-        "Fluid[].Rheometer[].RheometerViscosities[].Viscosity"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "Pa",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"Pa\",\"baseMeasurement\":{\"ancestry\":\"M/LT2\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:Pa:",
-      "propertyNames": [
-        "Fluid[].YieldPoint",
-        "Fluid[].Gel0Sec",
-        "Fluid[].Gel10Sec",
-        "Fluid[].Gel10Min",
-        "Fluid[].Gel30Min",
-        "Fluid[].FiltratePressureHthp",
-        "Fluid[].Rheometer[].PressureRheometer"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "m3/m3",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"m3/m3\",\"baseMeasurement\":{\"ancestry\":\"1\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:m3%2Fm3:",
-      "propertyNames": [
-        "Fluid[].SolidsPc",
-        "Fluid[].WaterPc",
-        "Fluid[].OilPc",
-        "Fluid[].SandPc",
-        "Fluid[].SolidsLowGravPc",
-        "Fluid[].SolidsHiGravPc",
-        "Fluid[].SolidsCalcPc",
-        "Fluid[].BaritePc",
-        "Fluid[].BrinePc",
-        "Fluid[].CalciumChloridePc",
-        "Fluid[].Polymer",
-        "Fluid[].SolCorPc",
-        "Fluid[].SaltPc",
-        "Fluid[].SodiumChloridePc"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "V",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"V\",\"baseMeasurement\":{\"ancestry\":\"L2M/IT3\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:V:",
-      "propertyNames": [
-        "Fluid[].ElectStab"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "kg/kg",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"kg/kg\",\"baseMeasurement\":{\"ancestry\":\"1\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:kg%2Fkg:",
-      "propertyNames": [
-        "Fluid[].Asg",
-        "Fluid[].OilCtg",
-        "Fluid[].HardnessCa"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "kg",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"kg\",\"baseMeasurement\":{\"ancestry\":\"M\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:kg:",
-      "propertyNames": [
-        "Fluid[].MetalRecovered"
-      ]
-    },
-    {
-      "kind": "Unit",
-      "name": "rad/s",
-      "persistableReference": "{\"abcd\":{\"a\":0.0,\"b\":1.0,\"c\":1.0,\"d\":0.0},\"symbol\":\"rad/s\",\"baseMeasurement\":{\"ancestry\":\"A/T\",\"type\":\"UM\"},\"type\":\"UAD\"}",
-      "unitOfMeasureID": "namespace:reference-data--UnitOfMeasure:rad%2Fs:",
-      "propertyNames": [
-        "Fluid[].Rheometer[].RheometerViscosities[].Speed"
+        "VerticalMeasurement.VerticalMeasurement"
       ]
     }
   ],
@@ -242,19 +79,17 @@
         ],
         "AcceptableUsage": [
           {
-            "WorkflowUsageTypeID": "namespace:reference-data--WorkflowUsageType:SeismicProcessing:",
-            "WorkflowPersonaTypeID": "namespace:reference-data--WorkflowPersonaType:SeismicProcessor:",
-            "DataQualityRuleSetID": "namespace:reference-data--DataQualityRuleSet:SeismicProcessingQCRuleSet:",
-            "DataQualityID": "namespace:work-product-component--DataQuality:6a433d16-07c8-4f4d-9ddc-5608e2ec4234:1562066077849221",
+            "WorkflowUsage": "namespace:reference-data--WorkflowUsageType:SeismicProcessing:",
+            "WorkflowPersona": "namespace:reference-data--WorkflowPersonaType:SeismicProcessor:",
+            "QualityDataRuleSetID": "namespace:reference-data--QualityDataRuleSet:SeismicProcessingQCRuleSet:",
             "ValueChainStatusTypeID": "namespace:reference-data--ValueChainStatusType:Exploration:"
           }
         ],
         "UnacceptableUsage": [
           {
-            "WorkflowUsageTypeID": "namespace:reference-data--WorkflowUsageType:SeismicInterpretation:",
-            "WorkflowPersonaTypeID": "namespace:reference-data--WorkflowPersonaType:SeismicInterpreter:",
-            "DataQualityRuleSetID": "namespace:reference-data--DataQualityRuleSet:SeismicInterpretationQCRuleSet:",
-            "DataQualityID": "namespace:work-product-component--DataQuality:d79bf97c-ff7c-4b82-89b5-c88520c15017:1562066009929332",
+            "WorkflowUsage": "namespace:reference-data--WorkflowUsageType:SeismicInterpretation:",
+            "WorkflowPersona": "namespace:reference-data--WorkflowPersonaType:SeismicInterpreter:",
+            "QualityDataRuleSetID": "namespace:reference-data--QualityDataRuleSet:SeismicInterpretationQCRuleSet:",
             "ValueChainStatusTypeID": "namespace:reference-data--ValueChainStatusType:FieldDevelopment:"
           }
         ],
@@ -492,114 +327,51 @@
         "LineageRelationshipType": "namespace:reference-data--LineageRelationshipType:Direct:"
       }
     ],
-    "StartDateTime": "2020-02-13T09:13:15.55Z",
-    "EndDateTime": "2020-02-13T09:13:15.55Z",
-    "NumReport": 12345.6,
-    "Fluid": [
+    "WellID": "namespace:master-data--Well:SomeUniqueWellID:",
+    "WellboreID": "namespace:master-data--Wellbore:SomeUniqueWellboreID:",
+    "RecordDate": "2020-02-13T09:13:15.55Z",
+    "ContextTypeID": "namespace:reference-data--PPFGContextType:InterpretationPreDrill:",
+    "ServiceCompanyID": "namespace:master-data--Organisation:SomeUniqueOrganisationID:",
+    "Comment": "Example Comment",
+    "ReferenceWellTrajectoryID": "namespace:work-product-component--WellboreTrajectory:WellboreTrajectory-911bb71f-06ab-4deb-8e68-b8c9229dc76b:",
+    "OffsetWellboreIDs": [
+      "namespace:master-data--Wellbore:SomeUniqueWellboreID:"
+    ],
+    "PrimaryReferenceCurveID": "Example PrimaryReferenceCurveID",
+    "PrimaryReferenceType": "Example PrimaryReferenceType",
+    "AbsentValueCharacters": "Example AbsentValueCharacters",
+    "TectonicSetting": "namespace:reference-data--TectonicSettingType:Compressional:",
+    "GaugeType": "Example GaugeType",
+    "VerticalMeasurement": {
+      "EffectiveDateTime": "2020-02-13T09:13:15.55Z",
+      "VerticalMeasurement": 12345.6,
+      "TerminationDateTime": "2020-02-13T09:13:15.55Z",
+      "VerticalMeasurementTypeID": "namespace:reference-data--VerticalMeasurementType:ArbitraryPoint:",
+      "VerticalMeasurementPathID": "namespace:reference-data--VerticalMeasurementPath:MeasuredDepth:",
+      "VerticalMeasurementSourceID": "namespace:reference-data--VerticalMeasurementSource:DRL:",
+      "WellboreTVDTrajectoryID": "namespace:work-product-component--WellboreTrajectory:WellboreTrajectory-911bb71f-06ab-4deb-8e68-b8c9229dc76b:",
+      "VerticalMeasurementUnitOfMeasureID": "namespace:reference-data--UnitOfMeasure:m:",
+      "VerticalCRSID": "namespace:reference-data--CoordinateReferenceSystem:BoundProjected:EPSG::32021_EPSG::15851:",
+      "VerticalReferenceID": "Example VerticalReferenceID",
+      "VerticalReferenceEntityID": "namespace:master-data--Rig:SomeUniqueRigID:",
+      "VerticalMeasurementDescription": "Example VerticalMeasurementDescription"
+    },
+    "Curves": [
       {
-        "Type": "namespace:reference-data--FluidType:WBM%20-%20PAD%20Mud:",
-        "BrandName": "Example Brand Name",
-        "SampleLocation": "Example Sample Location",
-        "SampleDateTime": "2020-02-13T09:13:15.55Z",
-        "MeasuredDepth": 12345.6,
-        "TVD": 12345.6,
-        "EquivalentCirculatingDensity": 12345.6,
-        "EquivalentStaticDensity": 12345.6,
-        "KickToleranceVolume": 12345.6,
-        "KickToleranceIntensity": 12345.6,
-        "TemperatureFlowLine": 12345.6,
-        "MudClass": "namespace:reference-data--MudClass:water%20based:",
-        "Density": 12345.6,
-        "ViscosityFunnel": 12345.6,
-        "TemperatureViscosity": 12345.6,
-        "PlasticViscosity": 12345.6,
-        "YieldPoint": 12345.6,
-        "LowShearYieldPoint": 12345.6,
-        "Gel0Sec": 12345.6,
-        "Gel10Sec": 12345.6,
-        "Gel10Min": 12345.6,
-        "Gel30Min": 12345.6,
-        "FilterCakeLtlp": 12345.6,
-        "FiltrateLtlp": 12345.6,
-        "AnnularShapeRatio": 12345.6,
-        "FiltrateTemperatureHthp": 12345.6,
-        "FiltratePressureHthp": 12345.6,
-        "FiltrateHthp": 12345.6,
-        "FilterCakeHthp": 12345.6,
-        "SolidsPc": 12345.6,
-        "WaterPc": 12345.6,
-        "OilPc": 12345.6,
-        "SandPc": 12345.6,
-        "SolidsLowGravPc": 12345.6,
-        "SolidsLowGrav": 12345.6,
-        "SolidsLowGravCorrected": 12345.6,
-        "SolidsHiGravPc": 12345.6,
-        "SolidsHiGrav": 12345.6,
-        "SolidsHiGravCorrected": 12345.6,
-        "SolidsCalcPc": 12345.6,
-        "BaritePc": 12345.6,
-        "Lcm": 12345.6,
-        "Mbt": 12345.6,
-        "MudPh": 12345.6,
-        "MudTempPh": 12345.6,
-        "Pm": 12345.6,
-        "PmFiltrate": 12345.6,
-        "Mf": 12345.6,
-        "AlkalinityP1": 12345.6,
-        "AlkalinityP2": 12345.6,
-        "Chloride": 12345.6,
-        "Calcium": 12345.6,
-        "Magnesium": 12345.6,
-        "Potassium": 12345.6,
-        "BrinePc": 12345.6,
-        "BrineDensity": 12345.6,
-        "Lime": 12345.6,
-        "ElectStab": 12345.6,
-        "CalciumChloridePc": 12345.6,
-        "CalciumChloride": 12345.6,
-        "CompanyID": "namespace:master-data--Organisation:SomeUniqueOrganisationID:",
-        "MudEngineer": "Example Mud Engineer",
-        "Asg": 12345.6,
-        "Polymer": 12345.6,
-        "PolymerType": [
-          "Example PolymerType"
+        "CurveID": "Example CurveID",
+        "CurveName": "Example CurveName",
+        "CurveMainFamilyID": "namespace:reference-data--PPFGCurveMainFamily:PorePressure:",
+        "CurveFamilyID": "namespace:reference-data--PPFGCurveFamily:TrueVerticalDepth:",
+        "CurveFamilyMnemonicID": "namespace:reference-data--PPFGCurveMnemonic:TVD:",
+        "CurveProbabilityID": "namespace:reference-data--PPFGCurveProbability:Most%20Likely:",
+        "CurveDataProcessingTypeIDs": [
+          "namespace:reference-data--PPFGCurveProcessingType:Filtered:"
         ],
-        "SolCorPc": 12345.6,
-        "OilCtg": 12345.6,
-        "OilCtgDry": 12345.6,
-        "HardnessCa": 12345.6,
-        "Sulfide": 12345.6,
-        "AverageCuttingSize": 12345.6,
-        "Carbonate": 12345.6,
-        "Iron": 12345.6,
-        "MetalRecovered": 12345.6,
-        "Turbidity": 12345.6,
-        "OilGrease": 12345.6,
-        "Salt": 12345.6,
-        "SaltPc": 12345.6,
-        "Tct": 12345.6,
-        "WaterPhaseSalinity": 12345.6,
-        "WholeMudCalcium": 12345.6,
-        "WholeMudChloride": 12345.6,
-        "ZincOxide": 12345.6,
-        "SodiumChloride": 12345.6,
-        "SodiumChloridePc": 12345.6,
-        "Comments": "Example Comments",
-        "Rheometer": [
-          {
-            "TemperatureRheometer": 12345.6,
-            "PressureRheometer": 12345.6,
-            "RheometerViscosities": [
-              {
-                "Speed": 12345.6,
-                "Viscosity": 12345.6
-              }
-            ]
-          }
-        ]
+        "CurveLithologyID": "namespace:reference-data--PPFGCurveLithoType:Sand:",
+        "CurveTransformModelTypeID": "namespace:reference-data--PPFGCurveTransformModelType:Eaton:",
+        "CurveUOM": "namespace:reference-data--UnitOfMeasure:m:"
       }
     ],
-    "WellboreID": "namespace:master-data--Wellbore:SomeUniqueWellboreID:",
     "ExtensionProperties": {}
   }
 }

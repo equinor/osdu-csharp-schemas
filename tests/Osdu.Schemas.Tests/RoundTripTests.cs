@@ -32,9 +32,12 @@ public class RoundTripTests
     public static TheoryData<string> AllFixtures()
     {
         var data = new TheoryData<string>();
-        foreach (var path in Directory.EnumerateFiles(FixturesDir, "*.json").OrderBy(x => x))
+        // Fixtures are organised by group: Fixtures/<Group>/<Name>.<V>.json
+        foreach (var path in Directory.EnumerateFiles(FixturesDir, "*.json", SearchOption.AllDirectories)
+                     .OrderBy(x => x))
         {
-            data.Add(Path.GetFileName(path));
+            var rel = Path.GetRelativePath(FixturesDir, path);
+            data.Add(rel);
         }
         return data;
     }
@@ -93,28 +96,39 @@ public class RoundTripTests
     }
 
     /// <summary>
-    /// Resolves a fixture file name like <c>WellLog.1.5.0.json</c> to the
-    /// matching generated type <c>Osdu.Schemas.WorkProductComponent.WellLog.V1_5_0.Data</c>.
+    /// Resolves a relative fixture path like
+    /// <c>WorkProductComponent/WellLog.1.5.0.json</c> or
+    /// <c>MasterData/Well.1.2.0.json</c> to the matching generated type's
+    /// <c>Data</c> class, e.g. <c>Osdu.Schemas.WorkProductComponent.WellLog.V1_5_0.Data</c>.
     /// </summary>
-    private static Type ResolveDataType(string fixtureFileName)
+    private static Type ResolveDataType(string fixtureRelativePath)
     {
-        var match = Regex.Match(fixtureFileName, @"^(?<type>\w+)\.(?<maj>\d+)\.(?<min>\d+)\.(?<pat>\d+)\.json$");
+        var parts = fixtureRelativePath.Replace('\\', '/').Split('/');
+        if (parts.Length != 2)
+        {
+            throw new ArgumentException(
+                $"Fixture path must be <Group>/<Name>.X.Y.Z.json (got: {fixtureRelativePath}).");
+        }
+        var group = parts[0];
+        var fileName = parts[1];
+
+        var match = Regex.Match(fileName, @"^(?<type>\w+)\.(?<maj>\d+)\.(?<min>\d+)\.(?<pat>\d+)\.json$");
         if (!match.Success)
         {
-            throw new ArgumentException($"Fixture file name doesn't match expected pattern: {fixtureFileName}");
+            throw new ArgumentException($"Fixture file name doesn't match expected pattern: {fileName}");
         }
         var fullName =
-            $"Osdu.Schemas.WorkProductComponent.{match.Groups["type"].Value}." +
+            $"Osdu.Schemas.{group}.{match.Groups["type"].Value}." +
             $"V{match.Groups["maj"].Value}_{match.Groups["min"].Value}_{match.Groups["pat"].Value}.Data";
 
         return SchemasAssembly.GetType(fullName, throwOnError: false)
             ?? throw new ArgumentException(
-                $"No generated type for fixture {fixtureFileName} (expected {fullName}).");
+                $"No generated type for fixture {fixtureRelativePath} (expected {fullName}).");
     }
 
-    private static JsonNode LoadDataNode(string fixtureFileName)
+    private static JsonNode LoadDataNode(string fixtureRelativePath)
     {
-        var path = Path.Combine(FixturesDir, fixtureFileName);
+        var path = Path.Combine(FixturesDir, fixtureRelativePath);
         var record = JsonNode.Parse(File.ReadAllText(path))!.AsObject();
         return record["data"]!.DeepClone();
     }

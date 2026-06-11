@@ -40,35 +40,33 @@ var wellLog = new Record
 await osdu.WellboreDdms.Ddms.V3.Welllogs.PostAsync([wellLog]);
 ```
 
-## Current scope (v0.2 — well-domain WPCs)
+## Current scope (v0.2 — Wellbore DDMS surface)
 
-10 OSDU `work-product-component` types covering the WBDDMS well-data
-surface, with **every published version of each** in side-by-side
-namespaces:
+Every OSDU entity that the Wellbore DDMS API handles, derived directly
+from the WBDDMS OpenAPI spec (`/ddms/v3/*` endpoints), with **every
+published version of each** in side-by-side namespaces:
 
-| Type | Versions |
-|---|---|
-| `WellLog` | 1.0.0, 1.1.0, 1.2.0, 1.3.0, 1.4.0, 1.5.0 |
-| `WellboreTrajectory` | 1.0.0 → 1.4.0 |
-| `WellboreIntervalSet` | 1.0.0 → 1.3.1 |
-| `WellboreMarkerSet` | 1.0.0 → 1.5.1 |
-| `WellPressureTestInterpretation` | 1.0.0 |
-| `WellPressureTestRawMeasurement` | 1.0.0, 1.1.0 |
-| `WellMAASP` | 1.0.0 |
-| `WellFluidsReport` | 2.0.0 |
-| `WellOperationsReport` | 2.0.0, 2.1.0 |
-| `WellOpsNonProductiveTime` | 1.0.0 |
+| Group | Type | Versions |
+|---|---|---|
+| `work-product-component` | `WellLog` | 1.0.0, 1.1.0, 1.2.0, 1.3.0, 1.4.0, 1.5.0 |
+| `work-product-component` | `WellboreTrajectory` | 1.0.0 → 1.4.0 |
+| `work-product-component` | `WellboreIntervalSet` | 1.0.0 → 1.3.1 |
+| `work-product-component` | `WellboreMarkerSet` | 1.0.0 → 1.5.1 |
+| `work-product-component` | `PPFGDataset` | 1.0.0 → 1.2.0 |
+| `work-product-component` | `WellPressureTestRawMeasurement` | 1.0.0, 1.1.0 |
+| `master-data` | `Well` | 1.0.0 → 1.2.0 |
+| `master-data` | `Wellbore` | 1.0.0 → 1.4.0 |
+| `master-data` | `WellLogAcquisition` | 1.0.0 |
 
-**32 schema versions** + 42 abstract building blocks = 74 input files.
-Generator: [NJsonSchema][njs] (draft-07). Output: one `Data` class per
-version + nested types, all with `[JsonExtensionData]` so unknown fields
-round-trip. Date / time / date-time fields are emitted as `string` (OSDU
-example payloads carry non-conformant variants that the strict
-`System.Text.Json` parsers reject) — same pragmatic choice
-`os-core-common` makes with `Map<String, Object>`.
-
-See [PLAN.md](PLAN.md) for the full design rationale, the future-scope
-roadmap, and open decisions.
+**43 schema versions** + 60 abstract building blocks = 103 input files.
+Namespaces: `Osdu.Schemas.WorkProductComponent.<Type>.V<x>_<y>_<z>` and
+`Osdu.Schemas.MasterData.<Type>.V<x>_<y>_<z>`. Generator:
+[NJsonSchema][njs] (draft-07). Output: one `Data` class per version +
+nested types, all with `[JsonExtensionData]` so unknown fields round-trip.
+Date / time / date-time fields are emitted as `string` (OSDU example
+payloads carry non-conformant variants that the strict `System.Text.Json`
+parsers reject) — same pragmatic choice `os-core-common` makes with
+`Map<String, Object>`.
 
 [njs]: https://github.com/RicoSuter/NJsonSchema
 
@@ -76,7 +74,6 @@ roadmap, and open decisions.
 
 ```
 osdu-csharp-schemas/
-├── PLAN.md
 ├── README.md
 ├── schemas/2026.05.22/             # pinned snapshot of data-definitions Generated/
 ├── tools/SchemaGen/                # dotnet console: extracts `data`, flattens, runs NJsonSchema

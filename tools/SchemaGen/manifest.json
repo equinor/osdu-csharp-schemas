@@ -2,9 +2,89 @@
   "snapshot": "2026.05.22",
   "schemas": [
     {
-      "file": "work-product-component/WellFluidsReport.2.0.0.json",
-      "namespace": "Osdu.Schemas.WorkProductComponent.WellFluidsReport.V2_0_0",
-      "outputDir": "WorkProductComponent/WellFluidsReport/V2_0_0"
+      "file": "master-data/Well.1.0.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Well.V1_0_0",
+      "outputDir": "MasterData/Well/V1_0_0"
+    },
+    {
+      "file": "master-data/Well.1.1.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Well.V1_1_0",
+      "outputDir": "MasterData/Well/V1_1_0"
+    },
+    {
+      "file": "master-data/Well.1.2.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Well.V1_2_0",
+      "outputDir": "MasterData/Well/V1_2_0"
+    },
+    {
+      "file": "master-data/Well.1.3.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Well.V1_3_0",
+      "outputDir": "MasterData/Well/V1_3_0"
+    },
+    {
+      "file": "master-data/Well.1.4.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Well.V1_4_0",
+      "outputDir": "MasterData/Well/V1_4_0"
+    },
+    {
+      "file": "master-data/WellLogAcquisition.1.0.0.json",
+      "namespace": "Osdu.Schemas.MasterData.WellLogAcquisition.V1_0_0",
+      "outputDir": "MasterData/WellLogAcquisition/V1_0_0"
+    },
+    {
+      "file": "master-data/Wellbore.1.0.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Wellbore.V1_0_0",
+      "outputDir": "MasterData/Wellbore/V1_0_0"
+    },
+    {
+      "file": "master-data/Wellbore.1.1.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Wellbore.V1_1_0",
+      "outputDir": "MasterData/Wellbore/V1_1_0"
+    },
+    {
+      "file": "master-data/Wellbore.1.1.1.json",
+      "namespace": "Osdu.Schemas.MasterData.Wellbore.V1_1_1",
+      "outputDir": "MasterData/Wellbore/V1_1_1"
+    },
+    {
+      "file": "master-data/Wellbore.1.2.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Wellbore.V1_2_0",
+      "outputDir": "MasterData/Wellbore/V1_2_0"
+    },
+    {
+      "file": "master-data/Wellbore.1.3.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Wellbore.V1_3_0",
+      "outputDir": "MasterData/Wellbore/V1_3_0"
+    },
+    {
+      "file": "master-data/Wellbore.1.4.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Wellbore.V1_4_0",
+      "outputDir": "MasterData/Wellbore/V1_4_0"
+    },
+    {
+      "file": "master-data/Wellbore.1.5.0.json",
+      "namespace": "Osdu.Schemas.MasterData.Wellbore.V1_5_0",
+      "outputDir": "MasterData/Wellbore/V1_5_0"
+    },
+    {
+      "file": "master-data/Wellbore.1.5.1.json",
+      "namespace": "Osdu.Schemas.MasterData.Wellbore.V1_5_1",
+      "outputDir": "MasterData/Wellbore/V1_5_1"
+    },
+    {
+      "file": "work-product-component/PPFGDataset.1.0.0.json",
+      "namespace": "Osdu.Schemas.WorkProductComponent.PPFGDataset.V1_0_0",
+      "outputDir": "WorkProductComponent/PPFGDataset/V1_0_0"
+    },
+    {
+      "file": "work-product-component/PPFGDataset.1.1.0.json",
+      "namespace": "Osdu.Schemas.WorkProductComponent.PPFGDataset.V1_1_0",
+      "outputDir": "WorkProductComponent/PPFGDataset/V1_1_0"
+    },
+    {
+      "file": "work-product-component/PPFGDataset.1.2.0.json",
+      "namespace": "Osdu.Schemas.WorkProductComponent.PPFGDataset.V1_2_0",
+      "outputDir": "WorkProductComponent/PPFGDataset/V1_2_0"
     },
     {
       "file": "work-product-component/WellLog.1.0.0.json",
@@ -35,31 +115,6 @@
       "file": "work-product-component/WellLog.1.5.0.json",
       "namespace": "Osdu.Schemas.WorkProductComponent.WellLog.V1_5_0",
       "outputDir": "WorkProductComponent/WellLog/V1_5_0"
-    },
-    {
-      "file": "work-product-component/WellMAASP.1.0.0.json",
-      "namespace": "Osdu.Schemas.WorkProductComponent.WellMAASP.V1_0_0",
-      "outputDir": "WorkProductComponent/WellMAASP/V1_0_0"
-    },
-    {
-      "file": "work-product-component/WellOperationsReport.2.0.0.json",
-      "namespace": "Osdu.Schemas.WorkProductComponent.WellOperationsReport.V2_0_0",
-      "outputDir": "WorkProductComponent/WellOperationsReport/V2_0_0"
-    },
-    {
-      "file": "work-product-component/WellOperationsReport.2.1.0.json",
-      "namespace": "Osdu.Schemas.WorkProductComponent.WellOperationsReport.V2_1_0",
-      "outputDir": "WorkProductComponent/WellOperationsReport/V2_1_0"
-    },
-    {
-      "file": "work-product-component/WellOpsNonProductiveTime.1.0.0.json",
-      "namespace": "Osdu.Schemas.WorkProductComponent.WellOpsNonProductiveTime.V1_0_0",
-      "outputDir": "WorkProductComponent/WellOpsNonProductiveTime/V1_0_0"
-    },
-    {
-      "file": "work-product-component/WellPressureTestInterpretation.1.0.0.json",
-      "namespace": "Osdu.Schemas.WorkProductComponent.WellPressureTestInterpretation.V1_0_0",
-      "outputDir": "WorkProductComponent/WellPressureTestInterpretation/V1_0_0"
     },
     {
       "file": "work-product-component/WellPressureTestRawMeasurement.1.0.0.json",
