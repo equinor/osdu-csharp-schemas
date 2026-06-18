@@ -109,3 +109,17 @@ schemas. Bumping it is an explicit, reviewable PR:
 1. Copy the new files into a new `schemas/<new-date>/` directory.
 2. Update `tools/SchemaGen/manifest.json` to point at the new snapshot.
 3. Run the generator, run tests, observe any breakage.
+
+## Contributing
+
+Contributions are welcome — see [`CONTRIBUTING.md`](CONTRIBUTING.md) for
+development setup, the pull-request process, and commit conventions.
+
+## Security
+
+To report a security vulnerability, follow the process in
+[`SECURITY.md`](SECURITY.md). Do not open a public issue.
+
+## License
+
+Licensed under the [Apache License 2.0](LICENSE).
