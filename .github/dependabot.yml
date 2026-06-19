@@ -24,3 +24,8 @@ updates:
     # Prefix commit messages with "deps" to include dependency updates in patch releases
     commit-message:
       prefix: deps
+    # Group into one PR — also keeps titles lowercase ("bump the nuget group..."),
+    # which the commitlint subject-case rule requires (single bumps fail as "Bump X")
+    groups:
+      nuget:
+        patterns: ["*"]
