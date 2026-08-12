@@ -4,10 +4,12 @@ using NJsonSchema;
 using NJsonSchema.CodeGeneration.CSharp;
 using Osdu.Schemas.SchemaGen;
 
-// Manifest-driven generator. For each entry: load the OSDU schema, extract
-// the `data` subschema, flatten its allOf/$ref chain into a single
-// self-contained object schema, and emit a `Data.cs` file under the
-// configured namespace and output directory.
+// Snapshot-driven generator. The manifest pins the snapshot directory and the
+// schema groups in scope; every entity schema in those groups (all versions) is
+// discovered automatically, so a snapshot bump or adding a group needs no other
+// change. For each discovered schema: load the OSDU schema, extract the `data`
+// subschema, flatten its allOf/$ref chain into a single self-contained object
+// schema, and emit a `Data.cs` file under the derived namespace and output dir.
 //
 // allOf flattening is done in JSON before NJsonSchema sees the schema because
 // NJsonSchema 11.5 emits a class hierarchy for allOf chains with names that
@@ -25,10 +27,12 @@ var manifest = JsonSerializer.Deserialize<Manifest>(
 var schemaRoot = Path.Combine(repoRoot, "schemas", manifest.Snapshot);
 var generatedRoot = Path.Combine(repoRoot, "src", "Osdu.Schemas", "Generated");
 
-Console.WriteLine($"Snapshot: {manifest.Snapshot}");
-Console.WriteLine($"Schemas:  {manifest.Schemas.Count}\n");
+var entries = DiscoverEntries(schemaRoot, manifest.Groups);
 
-foreach (var entry in manifest.Schemas)
+Console.WriteLine($"Snapshot: {manifest.Snapshot}");
+Console.WriteLine($"Schemas:  {entries.Count}\n");
+
+foreach (var entry in entries)
 {
     var schemaFile = Path.Combine(schemaRoot, entry.File);
     var outputDir = Path.Combine(generatedRoot, entry.OutputDir);
@@ -76,9 +80,66 @@ foreach (var entry in manifest.Schemas)
         $"    -> {Path.GetRelativePath(repoRoot, outputFile)} ({code.Length:N0} chars)");
 }
 
-Console.WriteLine($"\nDone. Generated {manifest.Schemas.Count} schemas.");
+Console.WriteLine($"\nDone. Generated {entries.Count} schemas.");
 
 return 0;
+
+// Discover every entity schema (all versions) in the scoped groups. Schema
+// files are named `<Type>.<major>.<minor>.<patch>.json`; the type may itself
+// contain dots (e.g. dataset `File.Generic`), so the version is the last three
+// dot-separated numeric segments and everything before is the type name.
+static List<ManifestEntry> DiscoverEntries(string schemaRoot, IReadOnlyList<string> groups)
+{
+    var entries = new List<ManifestEntry>();
+    foreach (var group in groups)
+    {
+        var groupDir = Path.Combine(schemaRoot, group);
+        if (!Directory.Exists(groupDir))
+            throw new DirectoryNotFoundException($"Schema group not found: {groupDir}");
+
+        var groupNs = GroupToPascal(group);
+        foreach (var path in Directory.EnumerateFiles(groupDir, "*.json").OrderBy(p => p, StringComparer.Ordinal))
+        {
+            var (typeName, version) = ParseNameVersion(Path.GetFileName(path));
+            var typeToken = ConcatSegments(typeName);
+            var versionToken = "V" + version.Replace('.', '_');
+
+            entries.Add(new ManifestEntry(
+                File: $"{group}/{Path.GetFileName(path)}",
+                Namespace: $"Osdu.Schemas.{groupNs}.{typeToken}.{versionToken}",
+                OutputDir: Path.Combine(groupNs, typeToken, versionToken)));
+        }
+    }
+    // Stable, readable order: by output dir.
+    return entries.OrderBy(e => e.OutputDir, StringComparer.Ordinal).ToList();
+}
+
+static (string type, string version) ParseNameVersion(string fileName)
+{
+    var stem = fileName.EndsWith(".json", StringComparison.Ordinal)
+        ? fileName[..^5]
+        : fileName;
+    var parts = stem.Split('.');
+    if (parts.Length < 4)
+        throw new FormatException($"Unexpected schema file name: {fileName}");
+    var version = string.Join('.', parts[^3..]);
+    var type = string.Join('.', parts[..^3]);
+    return (type, version);
+}
+
+// Dotted type names (dataset `File.Generic`, `File.Image.JPEG`) concatenate
+// into a single PascalCase identifier: `File.Generic` → `FileGeneric`.
+static string ConcatSegments(string typeName) =>
+    string.Concat(typeName.Split('.', StringSplitOptions.RemoveEmptyEntries));
+
+static string GroupToPascal(string group) => group switch
+{
+    "work-product-component" => "WorkProductComponent",
+    "master-data" => "MasterData",
+    "dataset" => "Dataset",
+    _ => string.Concat(group.Split('-').Select(s =>
+        s.Length == 0 ? s : char.ToUpperInvariant(s[0]) + s[1..])),
+};
 
 static string FindRepoRoot()
 {
@@ -91,5 +152,5 @@ static string FindRepoRoot()
         ?? throw new InvalidOperationException("Could not locate Osdu.Schemas.slnx in ancestry.");
 }
 
-internal sealed record Manifest(string Snapshot, List<ManifestEntry> Schemas);
+internal sealed record Manifest(string Snapshot, List<string> Groups);
 internal sealed record ManifestEntry(string File, string Namespace, string OutputDir);
