@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/equinor/osdu-csharp-schemas/compare/v0.2.1...v0.3.0) (2026-08-13)
+
+
+### Features
+
+* expand scope to all wpc/master-data/dataset types on M27.0 snapshot ([#12](https://github.com/equinor/osdu-csharp-schemas/issues/12)) ([451d79f](https://github.com/equinor/osdu-csharp-schemas/commit/451d79fa91049a34efa4fe032122d827b0f24d4d))
+
+
+### Dependencies
+
+* Bump Microsoft.NET.Test.Sdk from 18.6.0 to 18.8.1 ([#11](https://github.com/equinor/osdu-csharp-schemas/issues/11)) ([307e15a](https://github.com/equinor/osdu-csharp-schemas/commit/307e15a4edc8df1e5aa538ff139153c1ff690a08))
+* bump the github-actions group across 1 directory with 5 updates ([#9](https://github.com/equinor/osdu-csharp-schemas/issues/9)) ([a2a1363](https://github.com/equinor/osdu-csharp-schemas/commit/a2a136365d3cd32f69748bc02c36eb34a84935d4))
+
 ## [0.2.1](https://github.com/equinor/osdu-csharp-schemas/compare/v0.2.0...v0.2.1) (2026-06-11)
 
 
