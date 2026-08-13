@@ -16,12 +16,12 @@ jobs:
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
+        uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5.4.0
         with:
           dotnet-version: "10.x"
 
@@ -30,6 +30,18 @@ jobs:
 
       - name: Build
         run: dotnet build Osdu.Schemas.slnx --configuration Release
+
+      - name: Fetch OSDU example payloads (best-effort)
+        continue-on-error: true
+        run: |
+          # Round-trip tests validate against canonical OSDU example payloads,
+          # expected at ../data-definitions/Examples (sibling checkout). Fetch
+          # just the Examples tree via a shallow sparse clone; if it fails, the
+          # example-based tests skip and only generation + import are checked.
+          git clone --depth 1 --filter=blob:none --sparse \
+            https://community.opengroup.org/osdu/data/data-definitions.git \
+            ../data-definitions
+          git -C ../data-definitions sparse-checkout set Examples
 
       - name: Test
         run: dotnet test Osdu.Schemas.slnx --configuration Release --no-build --logger "console;verbosity=normal"
