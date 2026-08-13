@@ -31,5 +31,17 @@ jobs:
       - name: Build
         run: dotnet build Osdu.Schemas.slnx --configuration Release
 
+      - name: Fetch OSDU example payloads (best-effort)
+        continue-on-error: true
+        run: |
+          # Round-trip tests validate against canonical OSDU example payloads,
+          # expected at ../data-definitions/Examples (sibling checkout). Fetch
+          # just the Examples tree via a shallow sparse clone; if it fails, the
+          # example-based tests skip and only generation + import are checked.
+          git clone --depth 1 --filter=blob:none --sparse \
+            https://community.opengroup.org/osdu/data/data-definitions.git \
+            ../data-definitions
+          git -C ../data-definitions sparse-checkout set Examples
+
       - name: Test
         run: dotnet test Osdu.Schemas.slnx --configuration Release --no-build --logger "console;verbosity=normal"
