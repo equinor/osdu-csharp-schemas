@@ -47,6 +47,14 @@ foreach (var entry in entries)
     var flattened = SchemaFlattener.Flatten(dataNode, baseDir);
     flattened["type"] = "object";
 
+    // Strip `enum` / `const` constraints so constrained string fields generate
+    // as plain `string` instead of strict C# enums. This library types `data`
+    // for *lossless* round-tripping, not semantic validation: OSDU payloads
+    // carry enum values outside the published set (and NJsonSchema sanitises
+    // enum member names, which loses the original spelling on the way back
+    // out). Same pragmatic choice already made for date / date-time / time.
+    StripValueConstraints(flattened);
+
     var dataSchema = await JsonSchema.FromJsonAsync(flattened.ToJsonString());
 
     var settings = new CSharpGeneratorSettings
@@ -140,6 +148,29 @@ static string GroupToPascal(string group) => group switch
     _ => string.Concat(group.Split('-').Select(s =>
         s.Length == 0 ? s : char.ToUpperInvariant(s[0]) + s[1..])),
 };
+
+// Recursively remove `enum` and `const` keywords so constrained values generate
+// as their plain underlying type (e.g. `string`) rather than strict C# enums.
+static void StripValueConstraints(JsonNode? node)
+{
+    switch (node)
+    {
+        case JsonObject obj:
+            obj.Remove("enum");
+            obj.Remove("const");
+            foreach (var (_, value) in obj.ToList())
+            {
+                StripValueConstraints(value);
+            }
+            break;
+        case JsonArray arr:
+            foreach (var item in arr)
+            {
+                StripValueConstraints(item);
+            }
+            break;
+    }
+}
 
 static string FindRepoRoot()
 {

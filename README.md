@@ -68,7 +68,10 @@ nested types, all with `[JsonExtensionData]` so unknown fields round-trip.
 Date / time / date-time fields are emitted as `string` (OSDU example
 payloads carry non-conformant variants that the strict `System.Text.Json`
 parsers reject) — same pragmatic choice `os-core-common` makes with
-`Map<String, Object>`.
+`Map<String, Object>`. For the same reason `enum` / `const` constraints are
+stripped so constrained fields stay plain `string`: this library types `data`
+for *lossless* round-tripping, not semantic validation, and OSDU payloads
+carry values outside the published enum sets.
 
 [njs]: https://github.com/RicoSuter/NJsonSchema
 
@@ -80,7 +83,7 @@ osdu-csharp-schemas/
 ├── schemas/M27.0/                 # pinned snapshot of data-definitions Generated/
 ├── tools/SchemaGen/                # dotnet console: extracts `data`, flattens, runs NJsonSchema
 ├── src/Osdu.Schemas/               # the library — generated code (gitignored)
-├── tests/Osdu.Schemas.Tests/       # round-trip + integration tests
+├── tests/Osdu.Schemas.Tests/       # round-trip coverage for every generated version
 └── samples/IngestWellLog/          # end-to-end: typed POCO + WBDDMS Record envelope
 ```
 
@@ -102,6 +105,18 @@ dotnet run --project samples/IngestWellLog
 
 Generated code lives under `src/Osdu.Schemas/Generated/` and is gitignored
 — regenerable from the pinned snapshot, never hand-edited.
+
+The round-trip tests validate every generated version against the canonical
+OSDU example payloads in a sibling `data-definitions` checkout, expected at
+`../data-definitions/Examples`. When that checkout is absent, the
+example-based cases skip and only the structural checks run. To fetch just the
+examples:
+
+```sh
+git clone --depth 1 --filter=blob:none --sparse \
+  https://community.opengroup.org/osdu/data/data-definitions.git ../data-definitions
+git -C ../data-definitions sparse-checkout set Examples
+```
 
 ## Updating the snapshot
 
