@@ -18,8 +18,4 @@
     <ProjectReference Include="..\..\src\Osdu.Schemas\Osdu.Schemas.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Fixtures/**/*.json" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
 </Project>

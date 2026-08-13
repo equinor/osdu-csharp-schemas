@@ -40,33 +40,38 @@ var wellLog = new Record
 await osdu.WellboreDdms.Ddms.V3.Welllogs.PostAsync([wellLog]);
 ```
 
-## Current scope (v0.2 — Wellbore DDMS surface)
+## Current scope
 
-Every OSDU entity that the Wellbore DDMS API handles, derived directly
-from the WBDDMS OpenAPI spec (`/ddms/v3/*` endpoints), with **every
-published version of each** in side-by-side namespaces:
+**All `work-product-component`, `master-data` and `dataset` entity types**
+in the pinned OSDU snapshot, with **every published version of each** in
+side-by-side namespaces:
 
-| Group | Type | Versions |
+| Group | Types | Versions |
 |---|---|---|
-| `work-product-component` | `WellLog` | 1.0.0, 1.1.0, 1.2.0, 1.3.0, 1.4.0, 1.5.0 |
-| `work-product-component` | `WellboreTrajectory` | 1.0.0 → 1.4.0 |
-| `work-product-component` | `WellboreIntervalSet` | 1.0.0 → 1.3.1 |
-| `work-product-component` | `WellboreMarkerSet` | 1.0.0 → 1.5.1 |
-| `work-product-component` | `PPFGDataset` | 1.0.0 → 1.2.0 |
-| `work-product-component` | `WellPressureTestRawMeasurement` | 1.0.0, 1.1.0 |
-| `master-data` | `Well` | 1.0.0 → 1.2.0 |
-| `master-data` | `Wellbore` | 1.0.0 → 1.4.0 |
-| `master-data` | `WellLogAcquisition` | 1.0.0 |
+| `work-product-component` | 97 | 291 |
+| `master-data` | 79 | 222 |
+| `dataset` | 28 | 60 |
 
-**43 schema versions** + 60 abstract building blocks = 103 input files.
-Namespaces: `Osdu.Schemas.WorkProductComponent.<Type>.V<x>_<y>_<z>` and
-`Osdu.Schemas.MasterData.<Type>.V<x>_<y>_<z>`. Generator:
+**204 entity types across 573 schema versions** + 145 abstract building
+blocks = 718 input files. The generator is data-driven: `tools/SchemaGen/manifest.json`
+pins the snapshot and lists the scoped groups, and every type and version is
+discovered from the snapshot automatically, so a snapshot bump (or adding a
+group) needs no other code change.
+
+Namespaces: `Osdu.Schemas.WorkProductComponent.<Type>.V<x>_<y>_<z>`,
+`Osdu.Schemas.MasterData.<Type>.V<x>_<y>_<z>` and
+`Osdu.Schemas.Dataset.<Type>.V<x>_<y>_<z>`. Dotted dataset type names are
+concatenated into a single identifier (`File.Generic` → `FileGeneric`).
+Generator:
 [NJsonSchema][njs] (draft-07). Output: one `Data` class per version +
 nested types, all with `[JsonExtensionData]` so unknown fields round-trip.
 Date / time / date-time fields are emitted as `string` (OSDU example
 payloads carry non-conformant variants that the strict `System.Text.Json`
 parsers reject) — same pragmatic choice `os-core-common` makes with
-`Map<String, Object>`.
+`Map<String, Object>`. For the same reason `enum` / `const` constraints are
+stripped so constrained fields stay plain `string`: this library types `data`
+for *lossless* round-tripping, not semantic validation, and OSDU payloads
+carry values outside the published enum sets.
 
 [njs]: https://github.com/RicoSuter/NJsonSchema
 
@@ -75,10 +80,10 @@ parsers reject) — same pragmatic choice `os-core-common` makes with
 ```
 osdu-csharp-schemas/
 ├── README.md
-├── schemas/2026.05.22/             # pinned snapshot of data-definitions Generated/
+├── schemas/M27.0/                 # pinned snapshot of data-definitions Generated/
 ├── tools/SchemaGen/                # dotnet console: extracts `data`, flattens, runs NJsonSchema
 ├── src/Osdu.Schemas/               # the library — generated code (gitignored)
-├── tests/Osdu.Schemas.Tests/       # round-trip + integration tests
+├── tests/Osdu.Schemas.Tests/       # round-trip coverage for every generated version
 └── samples/IngestWellLog/          # end-to-end: typed POCO + WBDDMS Record envelope
 ```
 
@@ -101,14 +106,31 @@ dotnet run --project samples/IngestWellLog
 Generated code lives under `src/Osdu.Schemas/Generated/` and is gitignored
 — regenerable from the pinned snapshot, never hand-edited.
 
+The round-trip tests validate every generated version against the canonical
+OSDU example payloads in a sibling `data-definitions` checkout, expected at
+`../data-definitions/Examples`. When that checkout is absent, the
+example-based cases skip and only the structural checks run. To fetch just the
+examples:
+
+```sh
+git clone --depth 1 --filter=blob:none --sparse \
+  https://community.opengroup.org/osdu/data/data-definitions.git ../data-definitions
+git -C ../data-definitions sparse-checkout set Examples
+```
+
 ## Updating the snapshot
 
-The `schemas/<date>/` directory is a pinned copy of the OSDU `Generated/`
-schemas. Bumping it is an explicit, reviewable PR:
+The `schemas/<snapshot>/` directory is a pinned copy of the OSDU `Generated/`
+schemas (the current one, `M27.0`, is data-definitions tag `v0.30.0` — the
+M27 milestone publication). Bumping it is an explicit, reviewable PR:
 
-1. Copy the new files into a new `schemas/<new-date>/` directory.
-2. Update `tools/SchemaGen/manifest.json` to point at the new snapshot.
+1. Copy the new `work-product-component`, `master-data`, `dataset` and
+   `abstract` folders into a new `schemas/<new-snapshot>/` directory.
+2. Update the `snapshot` field in `tools/SchemaGen/manifest.json`.
 3. Run the generator, run tests, observe any breakage.
+
+New types and versions are picked up automatically — the generator discovers
+every schema in the scoped `groups`, so no per-entity manifest edits are needed.
 
 ## Contributing
 
