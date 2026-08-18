@@ -19,4 +19,4 @@ jobs:
       contents: read
       actions: read
       security-events: write
-    uses: equinor/ops-actions/.github/workflows/zizmor-codeql.yml@8cf05342045a745a619bce94b04f235051a2a068 # v9.38.4
+    uses: equinor/ops-actions/.github/workflows/zizmor-codeql.yml@2198d70491e461c59dd3560b9ea10b1080d863c5 # v9.39.6
