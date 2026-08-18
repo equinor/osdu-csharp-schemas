@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/equinor/osdu-csharp-schemas/compare/v0.3.0...v0.3.1) (2026-08-18)
+
+
+### Dependencies
+
+* bump the github-actions group with 5 updates ([#14](https://github.com/equinor/osdu-csharp-schemas/issues/14)) ([e0cbaea](https://github.com/equinor/osdu-csharp-schemas/commit/e0cbaea46a99f00df4f1465310e4c78256146886))
+
 ## [0.3.0](https://github.com/equinor/osdu-csharp-schemas/compare/v0.2.1...v0.3.0) (2026-08-13)
 
 
